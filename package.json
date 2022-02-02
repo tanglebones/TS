@@ -1,0 +1,34 @@
+{
+  "name": "BadCadetblueRecursion",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "build": "tsc",
+    "test": "NODE_ENV=test mocha",
+    "cover": "NODE_ENV=test nyc mocha",
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
+    "doc": "npx typedoc src/**/*.ts --out docs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/mocha": "^9.1.0",
+    "@types/node": "^16.11.21",
+    "@types/sinon": "^10.0.9",
+    "@typescript-eslint/eslint-plugin": "^5.10.2",
+    "@typescript-eslint/parser": "^5.10.2",
+    "eslint": "^8.8.0",
+    "mocha": "^9.2.0",
+    "node": "^16.13.2",
+    "nyc": "^15.1.0",
+    "sinon": "^13.0.0",
+    "source-map-support": "^0.5.21",
+    "ts-node": "^10.4.0",
+    "typedoc": "^0.22.11",
+    "typescript": "^4.5.5"
+  },
+  "description": ""
+}
