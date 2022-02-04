@@ -3,20 +3,21 @@ import {memoize} from './memoize';
 
 describe('memoize', () => {
   it('calls once', () => {
-    let c = 0;
-
     function f() {
-      c += 1;
+      f.c += 1;
     }
+    f.c = 0;
 
     const g = memoize(f);
 
-    assert(c === 0);
+    assert(f.c === 0);
 
     g();
-    assert(c === 1);
+    // the linter sucks and assumes g() is pure and won't touch c. :(
+    // @ts-ignore
+    assert(f.c === 1);
 
     g();
-    assert(c === 1);
+    assert(f.c === 1);
   });
 });

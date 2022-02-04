@@ -1,5 +1,11 @@
 // istanbul ignore file -- bootstrap
-import {memoize} from "./lib/memoize";
+import {randomFillSync} from "crypto";
+import {tuidFactoryCtor} from "./lib/tuid";
 
-const x = memoize(()=>"is an test");
-console.log(x());
+const tuidFactory = tuidFactoryCtor(
+  randomFillSync,
+  () => +new Date(),
+)
+
+const t = tuidFactory();
+console.log(t.length, t);
