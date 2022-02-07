@@ -12,9 +12,9 @@ describe("tuid", () => {
   it("works", () => {
     const { tuidFactory, randomFillSyncStub, nowMsStub } = getSut();
 
-    nowMsStub.returns(0x7777_7777_7777_7777n);
-    assert.strictEqual("77777777777700000000000000000000", tuidFactory());
-    assert.strictEqual("77777777777800000000000000000000", tuidFactory());
+    nowMsStub.returns(0x7770_7771_7772_777en);
+    assert.strictEqual("77717772777e00000000000000000000", tuidFactory());
+    assert.strictEqual("77717772777f00000000000000000000", tuidFactory());
 
     randomFillSyncStub.callsFake((buffer: Buffer, start: number, count: number) => {
       const end = start + count;
@@ -22,6 +22,6 @@ describe("tuid", () => {
         buffer[i] = 0xff;
       }
     });
-    assert.strictEqual("777777777779ffffffffffffffffffff", tuidFactory());
+    assert.strictEqual("777177727780ffffffffffffffffffff", tuidFactory());
   });
 });
