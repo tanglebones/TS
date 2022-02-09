@@ -1,1 +1,109 @@
-<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>BadCadetblueRecursion</title><meta name="description" content="Documentation for BadCadetblueRecursion"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">BadCadetblueRecursion</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1> BadCadetblueRecursion</h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography"></div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Modules</a></li><li class=" tsd-kind-module"><a href="modules/memoize.html">memoize</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Legend</h2><div class="tsd-legend-group"><ul class="tsd-legend"><li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li></ul></div><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="assets/main.js"></script></body></html>
+<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>BadCadetblueRecursion</title><meta name="description" content="Documentation for BadCadetblueRecursion"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">BadCadetblueRecursion</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1> BadCadetblueRecursion</h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography">
+<a href="#cliff-isms-in-a-typescript-world" id="cliff-isms-in-a-typescript-world" style="color: inherit; text-decoration: none;">
+  <h1>Cliff-isms in a TypeScript world</h1>
+</a>
+<p>in no particular order...</p>
+
+<a href="#use-const-lambdas" id="use-const-lambdas" style="color: inherit; text-decoration: none;">
+  <h2>Use <code>const</code> lambdas</h2>
+</a>
+<p>in JavaScript the following are (ignoring <code>this</code> binding) the same:</p>
+<pre><code class="language-JavaScript"><span class="hl-0">export</span><span class="hl-1"> </span><span class="hl-2">function</span><span class="hl-1"> </span><span class="hl-3">foo</span><span class="hl-1">(</span><span class="hl-4">a</span><span class="hl-1">,</span><span class="hl-4">b</span><span class="hl-1">) {</span><br/><span class="hl-1">  </span><span class="hl-5">// some complex code so this isn&#39;t a trival expression...</span><br/><span class="hl-1">  </span><span class="hl-0">return</span><span class="hl-1"> </span><span class="hl-4">a</span><span class="hl-1"> + </span><span class="hl-4">b</span><span class="hl-1">;</span><br/><span class="hl-1">}</span><br/><br/><span class="hl-0">export</span><span class="hl-1"> </span><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-3">foo</span><span class="hl-1"> = (</span><span class="hl-4">a</span><span class="hl-1">,</span><span class="hl-4">b</span><span class="hl-1">) </span><span class="hl-2">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-5">// some complex code so this isn&#39;t a trival expression...</span><br/><span class="hl-1">  </span><span class="hl-0">return</span><span class="hl-1"> </span><span class="hl-4">a</span><span class="hl-1"> + </span><span class="hl-4">b</span><span class="hl-1">;</span><br/><span class="hl-1">};</span>
+</code></pre>
+<p>in TypeScript the addition of types makes the lambda form more &quot;friendly&quot; because the return types
+for lambda expressions are automatically inferred.</p>
+<pre><code class="language-TypeScript"><span class="hl-0">export</span><span class="hl-1"> </span><span class="hl-2">function</span><span class="hl-1"> </span><span class="hl-3">foo</span><span class="hl-1">(</span><span class="hl-4">a</span><span class="hl-1">: </span><span class="hl-6">number</span><span class="hl-1">, </span><span class="hl-4">b</span><span class="hl-1">: </span><span class="hl-6">number</span><span class="hl-1">): </span><span class="hl-6">number</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-5">// some complex code so this isn&#39;t a trival expression...</span><br/><span class="hl-1">  </span><span class="hl-0">return</span><span class="hl-1"> </span><span class="hl-4">a</span><span class="hl-1"> + </span><span class="hl-4">b</span><span class="hl-1">;</span><br/><span class="hl-1">}</span><br/><br/><span class="hl-0">export</span><span class="hl-1"> </span><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-3">foo</span><span class="hl-1"> = (</span><span class="hl-4">a</span><span class="hl-1">: </span><span class="hl-6">number</span><span class="hl-1">, </span><span class="hl-4">b</span><span class="hl-1">: </span><span class="hl-6">number</span><span class="hl-1">) </span><span class="hl-2">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-5">// some complex code so this isn&#39;t a trival expression...</span><br/><span class="hl-1">  </span><span class="hl-0">return</span><span class="hl-1"> </span><span class="hl-4">a</span><span class="hl-1"> + </span><span class="hl-4">b</span><span class="hl-1">;</span><br/><span class="hl-1">};</span>
+</code></pre>
+<p>Partial evaluation setup is also more compact in this form:</p>
+<pre><code class="language-TypeScript"><span class="hl-0">export</span><span class="hl-1"> </span><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-3">addN</span><span class="hl-1"> = (</span><span class="hl-4">n</span><span class="hl-1">:</span><span class="hl-6">number</span><span class="hl-1">) </span><span class="hl-2">=&gt;</span><span class="hl-1"> (</span><span class="hl-4">v</span><span class="hl-1">:</span><span class="hl-6">number</span><span class="hl-1">) </span><span class="hl-2">=&gt;</span><span class="hl-1"> </span><span class="hl-4">n</span><span class="hl-1"> + </span><span class="hl-4">v</span><span class="hl-1">;</span><br/><span class="hl-0">export</span><span class="hl-1"> </span><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-7">add2</span><span class="hl-1"> = </span><span class="hl-3">addN</span><span class="hl-1">(</span><span class="hl-8">2</span><span class="hl-1">);</span>
+</code></pre>
+<p>All the constructors (<code>Ctor</code>) I use are basically a form a partial application of the external abstractions the
+module uses. When I refer to &quot;constructor&quot; I am <em>not</em> talking about the <code>constructor</code> keyword, but the actual
+english word. I will often say this like &quot;see&quot; &quot;tor&quot;.</p>
+<p>I tend to export all my <code>Ctor</code>s as internal via:</p>
+<pre><code class="language-TypeScript"><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-3">fooCtor</span><span class="hl-1"> = () </span><span class="hl-2">=&gt;</span><span class="hl-1"> { </span><span class="hl-5">// not directly exported</span><br/><span class="hl-1">  </span><span class="hl-5">//...</span><br/><span class="hl-1">};</span><br/><span class="hl-0">export</span><span class="hl-1"> </span><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-7">internal</span><span class="hl-1"> = {</span><span class="hl-4">fooCtor</span><span class="hl-1">}; </span><span class="hl-5">// nested in `internal`</span><br/><span class="hl-0">export</span><span class="hl-1"> </span><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-7">fooProvider</span><span class="hl-1"> = </span><span class="hl-3">memoize</span><span class="hl-1">(()</span><span class="hl-2">=&gt;</span><span class="hl-3">fooCtor</span><span class="hl-1">()); </span><span class="hl-5">// if using providers... see below.</span>
+</code></pre>
+<p>This clearly indicates the provider should be used over the <code>Ctor</code> while still giving the tests
+access to the <code>Ctor</code>.</p>
+
+<a href="#internal-module-structure-amp-testability" id="internal-module-structure-amp-testability" style="color: inherit; text-decoration: none;">
+  <h2>Internal Module Structure &amp; Testability</h2>
+</a>
+<p><strong>Rule 1</strong>: Internal modules <em>must</em> only define pure functions (const lambdas).</p>
+<p>Running any code during initialization makes in impossible to test the module without also running that code, so
+limit top level module code to declaring pure functions or memoizing functions.</p>
+<p>Pure functions rely solely on their input. Any time a function uses an imported definition that is not a pure
+function it <em>must</em> export out a partial applicaion constructor (<code>Ctor</code>) and shadow the import into a parameter
+variable of the same name. In cases where the import itself is pure you may skip this if the function is
+relatively simple and stubbing it in a test would be more complex that using the real thing. (e.g. <code>Math.sin</code>)</p>
+<p>Anything that does IO is impure. That includes (but not limited to):</p>
+<ul>
+<li>Reading the clock</li>
+<li>Accessing the disk</li>
+<li>Accessing the network</li>
+<li>Outputting to <code>console.log</code></li>
+<li>Creating threads</li>
+</ul>
+<p><strong>Rule 2</strong>: <code>Ctor</code>s should not call their dependencies, but instead return functions that do. Since a <code>Ctor</code> executes
+during Bootstrap only part of the execution context will be initialised. It is not usually safe to call into any of
+the dependencies at this point as a further <code>Ctor</code>s could fail leaving the dependencies in a bad state. <code>Ctor</code>s are
+usually called once per execution context. Return a <code>Factory</code> from <code>Ctor</code> for cases that manger shorter lifetimes.</p>
+<p><strong>Rule 3</strong>: Figure out Bootstrap</p>
+<p>There are two primary approaches to bootstrapping an execution context. My preferred way is to have a single
+bootstrap file (per execution context) that creates instances of modules and chains them together in leaf-to-root
+order. The other approach is to use singleton providers defined in each module.</p>
+<p>An execution context is usually one of:</p>
+<ul>
+<li>A server on the network</li>
+<li>A tool run on the command line</li>
+<li>A test case</li>
+</ul>
+<p>Libraries/Modules are not execution contexts, and are used by execution contexts.</p>
+<p>For the singleton approach, anywhere you see <code>fooProvider</code> it&#39;ll be using <code>memoize</code> against the modules <code>fooCtor</code>.
+Unit tests don&#39;t call the provider function and instead use the constructor directly providing stubs for the modules
+dependencies. This isolates the code under test to the module&#39;s code.</p>
+<p>In single threaded languages, like TypeScript, using the lazy singleton provider approach is safe, but in a
+multithreaded language it is not. That is the primary reason to prefer the single file style of bootstrapping as
+it ensures bootstrap happens solely in the main thread before other threads can be spawnned.</p>
+<p><strong>Rule 4</strong>: <strong>No</strong> <code>this</code>, <strong>No</strong> inheritance, <strong>Avoid</strong> <code>new</code>.</p>
+<p>Implicit <code>this</code> is quite possible the worst concept to come out of Comp Sci. Use partial application
+and closures. (In languages other than JavaScript/TypeScript this can be relaxed to only allow private, 
+init-only fields.)</p>
+<p>The only time <code>this</code> should be used is in wrappers around third party code that force us to use it.</p>
+<p>Inheritance is quite possible the second worst concept to come out of Comp Sci. Use aggregation and type a bit more to
+forward the API... and then think about your life choices, because you probably shouldn&#39;t be forwarding the API.
+If you still don&#39;t agree go search for &quot;Extends is Evil&quot; and do some reading on how much damage inheritance
+can cause. To date I have seen one legitimate use for inheritance, and you don&#39;t have that use case.</p>
+<p>Since we don&#39;t use <code>this</code> there is no reason to use <code>new</code> unless forced too by third party library code. Before
+<code>async</code>/<code>await</code> the most common case was <code>new Promise(...)</code>. Use <code>new</code> if you have to, but none of the modules
+we create should require their consumers to use <code>new</code>. Another reason to avoid <code>new</code> is <code>constructor</code>functions
+(JS/TS ones) can not be <code>async</code>.</p>
+<p><strong>Rule 5</strong>: <strong>Avoid</strong> <code>export default</code></p>
+<p>Default exports lead to inconsistent naming on import as each module that is importing has to provide a name
+to import as. This can make finding all the usages of a module more complex. It&#39;s better to use named imports
+and have the default way of importing use the names given by the module. Some tooling forces the use of default
+exports (e.g. <code>.vue</code> file).</p>
+<p><strong>Rule 6</strong>: <strong>Avoid</strong> <code>null</code></p>
+<p><code>null</code> is JavaScript is <em>not</em> the <code>null</code> of other languages, <code>undefined</code> is. The TS team&#39;s recommendation is
+to always use <code>undefined</code>. See <a href="https://writingjavascript.com/why-you-should-always-use-undefined-and-never-null">https://writingjavascript.com/why-you-should-always-use-undefined-and-never-null</a></p>
+<p>Also, <code>JSON</code> is a protocal, and not part of the JS spec, so it&#39;s lack of <code>undefined</code> is not relavant to JS or TS.</p>
+
+<a href="#wrapper-modules" id="wrapper-modules" style="color: inherit; text-decoration: none;">
+  <h2>Wrapper Modules</h2>
+</a>
+<p>Wrappers around third-party modules and sources of IO are essential. If we can&#39;t interact with the code
+it isn&#39;t useful. By definition, you cannot <em>unit</em> test a wrapper. A wrapper always involves some external
+code, so it must be <em>integration</em> tested. This can be scripted (preferred) or done by hand. One other common
+testing exception is &quot;bootstrap&quot;, where-in if the code fails the execution context will fail to start,
+making the issue immediately apparent to the operator.</p>
+<p>Always minimize the surface area of a wrapper. It is tempting to include far too much in the &quot;wrapper&quot;, and get
+out of having to write automated unit tests for a bunch of code. For example, you could say that logging can&#39;t
+be unit tested at all, because it is obviously IO. In truth, the only parts that can&#39;t be unit tested are the 
+configuration and the IO to an output stream where the log is recorded.</p>
+<p>Abstracting those into wrappers is trivial:</p>
+<pre><code class="language-TypeScript"><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-3">logToConsole</span><span class="hl-1"> = (</span><span class="hl-4">msg</span><span class="hl-1">: </span><span class="hl-6">string</span><span class="hl-1">) </span><span class="hl-2">=&gt;</span><span class="hl-1"> { </span><span class="hl-4">console</span><span class="hl-1">.</span><span class="hl-3">error</span><span class="hl-1">(</span><span class="hl-4">msg</span><span class="hl-1">); };</span><br/><span class="hl-2">const</span><span class="hl-1"> </span><span class="hl-3">readLogConfigRaw</span><span class="hl-1"> = () </span><span class="hl-2">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-5">// read from where ever</span><br/><span class="hl-1">  </span><span class="hl-0">return</span><span class="hl-1"> </span><span class="hl-4">logConfigRaw</span><span class="hl-1">;</span><br/><span class="hl-1">};</span>
+</code></pre>
+<p>Parsing the config data should be exported and tested as well and not hidden away in the wrapper around getting
+the raw config data.</p>
+<p>All the other functionality (channel filtering, formatting, etc.) can be unit tested.</p>
+</div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Modules</a></li><li class=" tsd-kind-module"><a href="modules/memoize.html">memoize</a></li><li class=" tsd-kind-module"><a href="modules/tuid.html">tuid</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Legend</h2><div class="tsd-legend-group"><ul class="tsd-legend"><li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li><li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li></ul></div><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="assets/main.js"></script></body></html>
