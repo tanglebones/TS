@@ -3,8 +3,8 @@
 // bootstrap.ts file difficult.
 
 import {randomFillSync} from "crypto";
-import {tuidFactoryCtor} from "./tuid";
-import {memoize} from "./memoize";
+import {tuidFactoryCtor} from "../lib/tuid";
+import {memoize} from "../lib/memoize";
 
 const nowMs = () => +new Date();
 
