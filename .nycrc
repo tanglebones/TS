@@ -12,6 +12,7 @@
     "**/*.test.ts",
     "**/*.type.ts",
     "**/*.provider.ts",
+    "**/bootstrap.ts",
     "src/index.ts"
   ],
   "check-coverage": true,
