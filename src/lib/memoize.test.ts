@@ -3,7 +3,7 @@ import {memoize} from './memoize';
 
 describe('memoize', () => {
   it('calls once', () => {
-    function f() {
+    const f = () => {
       f.c += 1;
     }
 

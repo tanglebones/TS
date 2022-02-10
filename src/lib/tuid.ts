@@ -15,19 +15,8 @@ export const tuidFactory =  () => {
 };
 */
 
-const hexFormatter = (buffer: Buffer) => buffer.toString("hex");
-const base64urlFormatter = (buffer: Buffer) => buffer.toString("base64url");
-const hexToBase64url = (s: string) => Buffer.from(s, "hex").toString("base64url");
-const base64urlToHex = (s: string) => Buffer.from(s, "base64url").toString("hex");
-
-export const tuid = {
-  hexFormatter,
-  base64urlFormatter,
-  hexToBase64url,
-  base64urlToHex,
-};
-
-export type tuidFormatterType = (Buffer) => string;
+export const tuidHexToBase64url = (s: string) => Buffer.from(s, "hex").toString("base64url");
+export const tuidBase64urlToHex = (s: string) => Buffer.from(s, "base64url").toString("hex");
 
 /**
  * Returns a 128bit time prefixed (48 bits) random (80 bits) identifier encoded as hex (by default)
@@ -39,12 +28,12 @@ export type tuidFormatterType = (Buffer) => string;
  *
  * @param randomFillSync matches https://nodejs.org/api/crypto.html#cryptorandomfillsyncbuffer-offset-size
  * @param nowMs returns the current milliseconds since unix epoc
- * @param formatter formats the result buffer into a string; defaults to the hexFormatter
+ * @param format formats the result buffer into a string; defaults to the hexFormatter
  */
 export const tuidFactoryCtor = (
   randomFillSync: (buffer: Buffer, offset: number, count: number) => void,
   nowMs: () => number,
-  formatter: tuidFormatterType | undefined = undefined,
+  format: "hex" | "base64url" = "hex",
 ) => {
   let lastTime = 0n;
   return () => {
@@ -56,7 +45,31 @@ export const tuidFactoryCtor = (
     const buffer = Buffer.alloc(18);
     buffer.writeBigInt64BE(now, 0); // 8 bytes, of which we use 6 (48 bits)
     randomFillSync(buffer, 8, 10); // 10 bytes (80 bits)
-    return (formatter ?? hexFormatter)(buffer.subarray(2, 18));
+    return buffer.subarray(2, 18).toString(format);
   };
 }
 
+export const tuidEpochMicro = (tuid: string, format: "hex" | "base64url" | undefined = undefined) => {
+  const buffer = Buffer.alloc(18);
+  buffer[0] = 0;
+  buffer[1] = 0;
+  buffer.write(tuid, 2, format ?? "hex");
+  const n = buffer.readBigInt64BE(0);
+  return Number(n);
+};
+
+export const tuidForTestingFactoryCtor = (start = 0, format: "hex" | "base64url" | undefined = undefined) => {
+  let n = BigInt(start);
+  const fmt = format ?? "hex";
+  return () => {
+    const buffer = Buffer.alloc(18);
+    buffer.writeBigInt64BE(n, 0);
+    n += 1n;
+    return buffer.subarray(2, 18).toString(fmt);
+  };
+};
+
+// istanbul ignore next
+export const tuidZeroHex = '00000000000000000000000000000000';
+// istanbul ignore next
+export const tuidZeroBase64url = tuidHexToBase64url(tuidZeroHex);

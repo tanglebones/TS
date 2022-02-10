@@ -7,15 +7,13 @@ describe('registryFactory', () => {
     const registry = registryFactory<{ id: string, value: number }>();
     let id = 0;
     let value = 100;
-    const mk = function () {
-      return {
-        id: `x${id++}`,
-        value: value++,
-        toString() {
-          return `${this.id} ${this.value}`;
-        },
-      };
-    };
+    const mk = () => ({
+      id: `x${id++}`,
+      value: value++,
+      toString() {
+        return `${this.id} ${this.value}`;
+      },
+    });
 
     const mk1 = mk();
     const us1 = registry.register('1', mk1);

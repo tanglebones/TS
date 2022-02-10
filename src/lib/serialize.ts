@@ -15,21 +15,21 @@ export type serializableType =
  *
  * @param what data to serialize to JSON
  */
-export function serialize(what: serializableType): string {
+export const serialize = (what: serializableType) => {
   // Since stringify is pure we don't inject it.
   // We've limited the input space by using the TS type system to only accept data that won't throw an Error here.
   return stringify(what);
-}
+};
 
 /**
  * We return a `RecursivePartial<T>` because there is no guarantee the data in the string matches the type T's
  * requirements.
  *
- * @param serialized string to decode from JSON as a Partial<T>
+ * @param serialized JSON to deserialize into a RecursivePartial<T>
  */
-export function deserialize<T extends serializableType>(serialized: string): RecursivePartial<T> {
+export const deserialize = <T extends serializableType>(serialized: string) => {
   // JSON.parse is build-in and pure, so we don't inject it.
   // Technically we _should_ abstract the Errors it might thrown, but since this is built into the language
   // we can rely on them being stable. If this was a third party library we would consider it.
   return JSON.parse(serialized) as RecursivePartial<T>;
-}
+};

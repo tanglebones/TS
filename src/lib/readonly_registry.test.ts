@@ -5,15 +5,13 @@ describe('readonlyRegistryFactory', () => {
   it('Basics', () => {
     let id = 0;
     let value = 100;
-    const mk = function () {
-      return {
-        id: `x${id++}`,
-        value: value++,
-        toString() {
-          return `${this.id} ${this.value}`;
-        },
-      };
-    };
+    const mk = () => ({
+      id: `x${id++}`,
+      value: value++,
+      toString() {
+        return `${this.id} ${this.value}`;
+      },
+    });
 
     const mk1 = mk();
     const mk2 = mk();

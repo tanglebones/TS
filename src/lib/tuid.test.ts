@@ -1,14 +1,21 @@
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import {tuidFactoryCtor, tuid, tuidFormatterType} from './tuid';
+import {
+  tuidBase64urlToHex,
+  tuidEpochMicro,
+  tuidFactoryCtor,
+  tuidForTestingFactoryCtor,
+  tuidHexToBase64url
+} from './tuid';
 
 describe("tuid", () => {
-  const getSut = (formatter: tuidFormatterType | undefined = undefined) => {
+  const getSut = (format: "hex" | "base64url" | undefined = undefined) => {
     const randomFillSyncStub = sinon.stub();
     const nowMsStub = sinon.stub();
-    const tuidFactory = tuidFactoryCtor(randomFillSyncStub, nowMsStub, formatter);
+    const tuidFactory = tuidFactoryCtor(randomFillSyncStub, nowMsStub, format);
     return {tuidFactory, randomFillSyncStub, nowMsStub};
   };
+
   it("works w/ default formatter", () => {
     const {tuidFactory, randomFillSyncStub, nowMsStub} = getSut();
 
@@ -26,7 +33,7 @@ describe("tuid", () => {
   });
 
   it("works w/ b64u formatter", () => {
-    const {tuidFactory, randomFillSyncStub, nowMsStub} = getSut(tuid.base64urlFormatter);
+    const {tuidFactory, randomFillSyncStub, nowMsStub} = getSut("base64url" as const);
 
     nowMsStub.returns(0x7770_7771_7772_777en);
     assert.strictEqual("d3F3cnd-AAAAAAAAAAAAAA", tuidFactory());
@@ -42,14 +49,26 @@ describe("tuid", () => {
   });
 
   it("hexToBase64url", () => {
-    assert.strictEqual("d3F3cnd-AAAAAAAAAAAAAA", tuid.hexToBase64url("77717772777e00000000000000000000"));
-    assert.strictEqual("d3F3cnd_AAAAAAAAAAAAAA", tuid.hexToBase64url("77717772777f00000000000000000000"));
-    assert.strictEqual("d3F3cneA_____________w", tuid.hexToBase64url("777177727780ffffffffffffffffffff"));
+    assert.strictEqual("d3F3cnd-AAAAAAAAAAAAAA", tuidHexToBase64url("77717772777e00000000000000000000"));
+    assert.strictEqual("d3F3cnd_AAAAAAAAAAAAAA", tuidHexToBase64url("77717772777f00000000000000000000"));
+    assert.strictEqual("d3F3cneA_____________w", tuidHexToBase64url("777177727780ffffffffffffffffffff"));
   });
 
   it("base64urlToHex", () => {
-    assert.strictEqual("77717772777e00000000000000000000", tuid.base64urlToHex("d3F3cnd-AAAAAAAAAAAAAA"));
-    assert.strictEqual("77717772777f00000000000000000000", tuid.base64urlToHex("d3F3cnd_AAAAAAAAAAAAAA"));
-    assert.strictEqual("777177727780ffffffffffffffffffff", tuid.base64urlToHex("d3F3cneA_____________w"));
+    assert.strictEqual("77717772777e00000000000000000000", tuidBase64urlToHex("d3F3cnd-AAAAAAAAAAAAAA"));
+    assert.strictEqual("77717772777f00000000000000000000", tuidBase64urlToHex("d3F3cnd_AAAAAAAAAAAAAA"));
+    assert.strictEqual("777177727780ffffffffffffffffffff", tuidBase64urlToHex("d3F3cneA_____________w"));
+  });
+
+  it("tuidEpochMicro", () => {
+    {
+      const tuidFactory = tuidForTestingFactoryCtor();
+      assert.strictEqual(0, tuidEpochMicro(tuidFactory()));
+      assert.strictEqual(1, tuidEpochMicro(tuidFactory()));
+    }
+    {
+      const tuidFactory = tuidForTestingFactoryCtor(11);
+      assert.strictEqual(11, tuidEpochMicro(tuidFactory()));
+    }
   });
 });
