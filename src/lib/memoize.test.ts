@@ -6,6 +6,7 @@ describe('memoize', () => {
     function f() {
       f.c += 1;
     }
+
     f.c = 0;
 
     const g = memoize(f);

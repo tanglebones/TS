@@ -28,6 +28,7 @@ export const tuid = {
 };
 
 export type tuidFormatterType = (Buffer) => string;
+
 /**
  * Returns a 128bit time prefixed (48 bits) random (80 bits) identifier encoded as hex (by default)
  * Suitable for distributed system identifier generation.
@@ -40,7 +41,6 @@ export type tuidFormatterType = (Buffer) => string;
  * @param nowMs returns the current milliseconds since unix epoc
  * @param formatter formats the result buffer into a string; defaults to the hexFormatter
  */
-
 export const tuidFactoryCtor = (
   randomFillSync: (buffer: Buffer, offset: number, count: number) => void,
   nowMs: () => number,

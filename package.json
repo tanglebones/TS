@@ -13,7 +13,11 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "json-stable-stringify": "^1.0.1",
+    "lodash": "^4.17.21",
+    "xxhashjs": "^0.2.2"
+  },
   "devDependencies": {
     "@types/mocha": "^9.1.0",
     "@types/node": "^16.11.21",
