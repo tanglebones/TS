@@ -160,3 +160,30 @@ Parsing the config data should be exported and tested as well and not hidden awa
 the raw config data.
 
 All the other functionality (channel filtering, formatting, etc.) can be unit tested.
+
+# Notes on setting up WSL2 on Win10
+
+In "Turn Windows Features On & Off" enable **Windows Subsysytem for Linux** and the **Virtual Machine Platform**. 
+
+Reboot.
+
+run as Adimistrator
+```
+wsl --update
+wsl --set-default-version 2
+```
+
+Then install Ubuntu from the Microsoft Store.
+
+Use
+```
+wsl --list --verbose
+```
+
+To confirm the wsl version.
+
+If you've installed under version 1 use this to update it:
+```
+wsl --set-version <distro name> 2
+```
+
