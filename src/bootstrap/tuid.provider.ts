@@ -5,10 +5,9 @@
 import {randomFillSync} from "crypto";
 import {tuidFactoryCtor} from "../lib/tuid";
 import {memoize} from "../lib/memoize";
-
-const nowMs = () => +new Date();
+import {nowMsProvider} from "./now_ms.provider";
 
 export const tuidFactoryProvider = memoize(() => tuidFactoryCtor(
   randomFillSync,
-  nowMs,
+  nowMsProvider(),
 ));
