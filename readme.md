@@ -44,18 +44,6 @@ All the constructors (`Ctor`) I use are basically a form a partial application o
 uses. When I refer to "constructor" I am *not* talking about the `constructor` keyword, but the actual english word. I
 will often say this like "see" "tor".
 
-I tend to export all my `Ctor`s as internal via:
-
-```TypeScript
-const fooCtor = () => { // not directly exported
-                        //...
-};
-export const internal = {fooCtor}; // nested in `internal`
-export const fooProvider = memoize(() => fooCtor()); // if using providers... see below.
-```
-
-This clearly indicates the provider should be used over the `Ctor` while still giving the tests access to the `Ctor`.
-
 ## `Ctor` vs `Factory` vs "just a function"
 
 `Ctor` is used in bootstrap only. So all calls to the `Ctor` functions happen as part of the execution context starting
@@ -65,7 +53,7 @@ and in the main thread (not really relevant for node apps).
 primitive have special properties not enforced by the type system). They are typically impure functions using bound
 dependencies to produce what they return.
 
-Functions with decoration are typically pure. If not (e.g. bound to a closure context and impure) it should be clear
+Functions with out decoration are typically pure. If not (e.g. bound to a closure context and impure) it should be clear
 from their usage.
 
 ## Internal Module Structure & Testability
@@ -95,9 +83,10 @@ called once per execution context. Return a `Factory` from `Ctor` for cases that
 
 **Rule 3**: Figure out Bootstrap
 
-There are two primary approaches to bootstrapping an execution context. My preferred way is to have a single bootstrap
+There are two primary approaches to bootstrapping an execution context. My preferred way is to have a single `bootstrap.ts`
 file (per execution context) that creates instances of modules and chains them together in leaf-to-root order. The other
-approach is to use singleton providers defined in each module.
+approach is to use singleton providers defined in a `foo.provider.ts` companion module. (for tests, `foo.test.ts`, the
+bootstrap of the test set is inline with the tests)
 
 An execution context is usually one of:
 
@@ -105,7 +94,8 @@ An execution context is usually one of:
 - A tool run on the command line
 - A test case
 
-Libraries/Modules are not execution contexts, and are used by execution contexts.
+Libraries/Modules are not execution contexts, and are used by execution contexts. They should not have any bootstrap
+files themselves.
 
 For the singleton approach, anywhere you see `fooProvider` it'll be using `memoize` against the modules `fooCtor`. Unit
 tests don't call the provider function and instead use the constructor directly providing stubs for the modules
@@ -117,20 +107,22 @@ ensures bootstrap happens solely in the main thread before other threads can be 
 
 **Rule 4**: **No** `this`, **No** inheritance, **Avoid** `new`.
 
-Implicit `this` is quite possible the worst concept to come out of Comp Sci. Use partial application and closures. (In
-languages other than JavaScript/TypeScript this can be relaxed to only allow private, init-only fields.)
+Implicit `this` is quite possible the worst concept to come out of Comp Sci. Use partial application and closures. In
+languages other than JavaScript/TypeScript this can be relaxed to only allow private, init-only fields, to emulate the
+closure environment.
 
 The only time `this` should be used is in wrappers around third party code that force us to use it.
 
 Inheritance is quite possible the second worst concept to come out of Comp Sci. Use aggregation and type a bit more to
-forward the API... and then think about your life choices, because you probably shouldn't be forwarding the API. If you
-still don't agree go search for "Extends is Evil" and do some reading on how much damage inheritance can cause. To date
-I have seen one legitimate use for inheritance, and you don't have that use case.
+forward the API... and then think about your life choices, because you probably shouldn't be forwarding the whole API. If
+you don't agree go search for "Extends is Evil" and do some reading on how much damage inheritance can cause. To date
+I have seen one legitimate use for inheritance, and you probably don't have that use case. (It involves the impact of
+data packing on cachelines on memory read performance.)
 
-Since we don't use `this` there is no reason to use `new` unless forced too by third party library code. Before
-`async`/`await` the most common case was `new Promise(...)`. Use `new` if you have to, but none of the modules we create
-should require their consumers to use `new`. Another reason to avoid `new` is `constructor`functions
-(JS/TS ones) can not be `async`.
+Since we won't use `this` there is no reason to use `new` unless forced too by third party library code. Before
+`async`/`await` a common case was `new Promise(...)`. Use `new` if you have to, but none of the modules we create
+should require their consumers to use `new`. Another reason to avoid `new` is `constructor` functions
+(JS/TS ones) can not be `async`. `new Date()` would only appear in bootstrap, see Rule 1.
 
 **Rule 5**: **Avoid** `export default`
 
@@ -143,15 +135,17 @@ way of importing use the names given by the module. Some tooling forces the use 
 `null` is JavaScript is *not* the `null` of other languages, `undefined` is. The TS team's recommendation is to always
 use `undefined`. See https://writingjavascript.com/why-you-should-always-use-undefined-and-never-null
 
-Also, `JSON` is a protocal, and not part of the JS spec, so it's lack of `undefined` is not relavant to JS or TS.
+Also, `JSON` is a protocal, and not part of the JS spec, so it's lack of `undefined` is not relavant to JS or TS. The
+argument that JSON supports the use of `null` in JavaScript is like arguing that Java's use of some feature is relevant
+to JavaScript. Just because the names are similar doesn't mean you should apply rules from one to the other.
 
 ## Wrapper Modules
 
 Wrappers around third-party modules and sources of IO are essential. If we can't interact with the code it isn't useful.
-By definition, you cannot *unit* test a wrapper. A wrapper always involves some external code, so it must be *
-integration* tested. This can be scripted (preferred) or done by hand. One other common testing exception is "bootstrap"
-, where-in if the code fails the execution context will fail to start, making the issue immediately apparent to the
-operator.
+By definition, you cannot *unit* test a wrapper. A wrapper always involves some external code, so it must be
+*integration* tested. This can be scripted (preferred) or done by hand. One other common testing exception is
+"bootstrap" code, where-in if the code fails the execution context will fail to start, making the issue immediately 
+apparent to the operator as the execution context exits with an error.
 
 Always minimize the surface area of a wrapper. It is tempting to include far too much in the "wrapper", and get out of
 having to write automated unit tests for a bunch of code. For example, you could say that logging can't be unit tested
