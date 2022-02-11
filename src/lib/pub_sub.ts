@@ -14,6 +14,11 @@ export type pubSubType = {
  * In general it is not advisable to use the pubSub pattern as analysing what will happen when a message is published
  * becomes complex quickly.
  *
+ * Why CtorCtor vs FactoryCtor? Because if you have dynamic pub/sub instances it is most likely not the best approach.
+ * Most (if not all) pub/sub instances should be created in bootstrap. All of the subscribers should be set in
+ * bootstrap as well. And if that is the case then why are you using pub/sub instead of just calling the subscribers
+ * directly?
+ *
  * @param tuidFactory
  * @param registryFactory
  */
