@@ -2,7 +2,8 @@
 // original code
 
 import {randomFillSync} from "crypto";
-export const tuidFactory =  () => {
+let lasttime = 0n;
+export const tuidFactory = () => {
   let now = BigInt(+ Date.now());
   if (now <= lastTime) {
     now = lastTime + 1n;
