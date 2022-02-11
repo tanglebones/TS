@@ -30,7 +30,6 @@ export const pubSubCtorCtor = (tuidFactory: () => string, registryFactory: <T>()
           .map(
             async handler => handler(message),
           )
-          .flat(),
       );
     };
 
