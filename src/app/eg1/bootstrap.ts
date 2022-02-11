@@ -1,5 +1,5 @@
 import {randomFillSync} from "crypto";
-import {tuidFactoryCtor} from "./lib/tuid";
+import {tuidFactoryCtor} from "../../lib/tuid";
 
 const nowMs = () => +new Date();
 

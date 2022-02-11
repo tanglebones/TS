@@ -1,9 +1,9 @@
 {
   "name": "ts",
   "version": "1.0.0",
-  "main": "src/index.ts",
+  "main": "src/app/eg1/index.ts",
   "scripts": {
-    "start": "ts-node src/index.ts",
+    "start": "ts-node src/app/eg1/index.ts",
     "build": "tsc",
     "test": "NODE_ENV=test mocha",
     "cover": "NODE_ENV=test nyc mocha",

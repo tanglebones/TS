@@ -13,7 +13,7 @@
     "**/*.type.ts",
     "**/*.provider.ts",
     "**/bootstrap.ts",
-    "src/index.ts"
+    "src/app/*/index.ts"
   ],
   "check-coverage": true,
   "statements": 100,

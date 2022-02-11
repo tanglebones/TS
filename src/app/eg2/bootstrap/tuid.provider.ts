@@ -3,8 +3,8 @@
 // bootstrap.ts file difficult.
 
 import {randomFillSync} from "crypto";
-import {tuidFactoryCtor} from "../lib/tuid";
-import {memoize} from "../lib/memoize";
+import {tuidFactoryCtor} from "../../../lib/tuid";
+import {memoize} from "../../../lib/memoize";
 import {nowMsProvider} from "./now_ms.provider";
 
 export const tuidFactoryProvider = memoize(() => tuidFactoryCtor(
