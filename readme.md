@@ -65,7 +65,7 @@ and in the main thread (not really relevant for node apps).
 primitive have special properties not enforced by the type system). They are typically impure functions using bound
 dependencies to produce what they return.
 
-Functions with decoration are typically pure. If not (e.g. bound to a closure context and impure) it should be clear
+Functions with out decoration are typically pure. If not (e.g. bound to a closure context and impure) it should be clear
 from their usage.
 
 ## Internal Module Structure & Testability
