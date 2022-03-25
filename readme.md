@@ -175,7 +175,7 @@ In "Turn Windows Features On & Off" enable **Windows Subsysytem for Linux** and 
 
 Reboot.
 
-run as Adimistrator
+run as Administrator
 
 ```
 wsl --update
